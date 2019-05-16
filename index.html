@@ -1,14 +1,466 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
+
 <head>
     <meta charset="UTF-8">
-    <title></title>
-    <link rel="stylesheet" href="styles/style1.css">
+    <title>Document</title>
+    <!-- Подключаем UIKit по ссылке с api.oneteacher.space -->
     <link rel="stylesheet" href="uikit/uikit.min.css">
+    <style>
+        .fix_but {
+            position: fixed;
+            left: 85%;
+            top: 85%;
+
+        }
+        
+        .fix_header {
+            position: fixed;
+            width: 100%;
+            z-index: 10;
+        }
+        
+        .img_size {
+            height: 35%;
+            width: 40%;
+        }
+        
+    </style>
 </head>
+
 <body>
-    <script src="scripts/script1.js"></script>
+
+    <!-- НАЧАЛО: Шапка сайта -->
+    <div class="uk-navbar-container fix_header">
+        <div class="uk-container uk-container-large">
+            <nav class="uk-navbar">
+
+                <!-- Логотип (название) -->
+                <div class="uk-navbar-left">
+                    <div class="uk-navbar-item uk-logo uk-text-bold uk-text-danger">
+                        КупиХотьЧто-то!
+                    </div>
+                </div>
+
+                <!-- Корзина -->
+                <div class="uk-navbar-right">
+                    <a href="#onas" class="uk-button uk-button-text uk-margin-right" uk-scroll="offset: 100"> О нас</a>
+                    <a href="#otz" class="uk-button uk-button-text uk-margin-right" uk-scroll="offset: 100"> Отзывы</a>
+                    <a href="#invent" class="uk-button uk-button-text uk-margin-right" uk-scroll="offset: 100">Товары</a>
+                </div>
+                <div class="uk-navbar-right">
+                    <nav class="uk-navbar-container" uk-navbar>
+                        <div class="uk-navbar-left">
+                            <ul class="uk-navbar-nav">
+                                <li>
+                                    <a href="#"><button class="uk-button uk-button-danger" type="button">Меню пользователя</button></a>
+                                    <div class="uk-navbar-dropdown">
+                                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                                            <!--Меню входа/регистрации-->
+<!--
+
+                                            <li><a href="#" uk-icon="users" uk-toggle="target: #modal-close-default">Вход </a></li>
+                                            <div id="modal-close-default" uk-modal>
+                                                <div class="uk-modal-dialog uk-modal-body">
+                                                    <button class="uk-modal-close-default" type="button" uk-close></button>
+                                                    <h2 class="uk-modal-title">Вход</h2>
+                                                    <input id="Login" type="text" class="uk-input uk-margin-bottom" placeholder="Логин">
+                                                    <input id="Password" type="password" class="uk-input uk-margin-bottom" placeholder="Пароль">
+                                                    <button id="sendOrderBtn1" class="uk-button uk-button-danger uk-button-default uk-width-1-1"><span uk-icon="sign-in"></span>
+                                                        Войти</button>
+                                                </div>
+                                            </div>
+                                            <li class="uk-nav-divider"></li>
+                                            <li><a href="#" uk-icon="file-edit" uk-toggle="target: #modal-close-default1">Регистрация </a></li>
+                                            <div id="modal-close-default1" uk-modal>
+                                                <div class="uk-modal-dialog uk-modal-body">
+                                                    <button class="uk-modal-close-default" type="button" uk-close></button>
+                                                    <h2 class="uk-modal-title">Регистрация</h2>
+                                                    <input id="newLogin" type="text" class="uk-input uk-margin-bottom" placeholder="Придумайте Логин">
+                                                    <input id="newEmail" type="text" class="uk-input uk-margin-bottom" placeholder="Ваш Email">
+                                                    <input id="newPassword" type="password" class="uk-input uk-margin-bottom" placeholder="Придумайте пароль">
+                                                    <input id="newPassword2" type="password" class="uk-input uk-margin-bottom" placeholder="Подтвердите пароль">
+                                                    <button id="sendOrderBtn2" class="uk-button uk-button-danger uk-button-default uk-width-1-1"><span uk-icon="pencil"></span>
+                                                        Зарегистрироваться</button>
+                                                </div>
+                                            </div>
+-->
+                                            <!--Меню входа/регистрации
+
+                                            <!--                                            Меню Пользователя-->
+                                            
+<!--
+                                            <li>
+                                                <h3> <span uk-icon="icon: user"></span><span class="uk-margin-left">User</span></h3>
+                                            </li>
+                                            <li class="uk-nav-divider"></li>
+                                            <li class="uk-active uk-button uk-button-text"><a href="#modal-sections" uk-toggle> <span uk-icon="icon: cart"></span><span class="uk-margin-left">Корзина</span></a></li>
+                                            <div id="modal-sections" uk-modal>
+                                                <div class="uk-modal-dialog">
+                                                    <button class="uk-modal-close-default" type="button" uk-close></button>
+                                                    <div class="uk-modal-header">
+                                                        <h2 class="uk-modal-title"><span uk-icon="icon: cart"></span><span class="uk-margin-left">Корзина</span></h2>
+                                                    </div>
+                                                    <div class="uk-modal-body">
+                                                        <table class="uk-table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>id</th>
+                                                                    <th>Название</th>
+                                                                    <th>Цена</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>1</td>
+                                                                    <td>Ручка</td>
+                                                                    <td>20$</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <div id="sum_price">
+                                                            <p>Сумма заказа: <span id="summ">20</span></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="uk-modal-footer uk-text-right">
+                                                        <button class="uk-button uk-button-default uk-modal-close" type="button">Вернуться к покупкам</button>
+                                                        <button class="uk-button uk-button-danger" type="button">Оформить</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <li class="uk-nav-divider"></li>
+                                            <li class="uk-active uk-button uk-button-text"><a href="#"> <span uk-icon="icon:  sign-out"></span><span class="uk-margin-left">Выход</span></a>
+                                            </li>
+-->
+
+                                            <!--                                            Меню Пользователя-->
+
+                                            <!--                                           меню админа-->
+                                            
+                                            <li>
+                                                <h3> <span uk-icon="icon: user"></span><span class="uk-margin-left">Admin</span></h3>
+                                            </li>
+                                            <li class="uk-active uk-button uk-button-text"><a href="orders.html"> <span uk-icon="icon:  receiver"></span><span class="uk-margin-left">Управление звонками</span></a></li>
+                                            <li class="uk-active uk-button uk-button-text"><a href=""> <span uk-icon="icon:  mail"></span><span class="uk-margin-left">Управление заказами</span></a></li>
+                                            <li class="uk-active uk-button uk-button-text"><a href="addproduct.html"> <span uk-icon="icon: plus"></span><span class="uk-margin-left">Добавить товар</span></a></li>
+                                            <li class="uk-active uk-button uk-button-text"><a href="addproduct.html"> <span uk-icon="icon: plus"></span><span class="uk-margin-left">Пользователи</span></a></li>
+                                            <li class="uk-nav-divider"></li>
+                                            <li class="uk-active uk-button uk-button-text"><a href="#"> <span uk-icon="icon:  sign-out"></span><span class="uk-margin-left">Выход</span></a>
+
+                                            <!--                                       Меню админа-->
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- КОНЕЦ: Шапка сайта -->
+
+
+
+
+    <!-- НАЧАЛО: Тело страницы -->
+    <div class="uk-container uk-container-large">
+        <!-- НАЧАЛО: Внешний грид (разделяет на 2 колонки: контент и реклама) -->
+        <div uk-grid class="uk-padding-large uk-padding-remove-horizontal uk-grid-divider">
+
+            <!-- НАЧАЛО: Колонка содержимого (товары + комментарии) -->
+            <div class="uk-width-1-1">
+                <main>
+                    <h2 id="onas" class="uk-margin-bottom uk-margin-top"><span uk-icon="database"></span>О нас</h2>
+                    <hr class="uk-margin-medium-bottom">
+                    <div class="onaskontainer">
+                        <div class="uk-panel">
+                            <img class="uk-align-left uk-margin-remove-adjacent img_size" src="img/671129c3ef894c8803225d369656dffa.jpg" width="225" height="150" alt="Example image">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                        <div class="uk-panel">
+                            <img class="uk-align-right uk-margin-remove-adjacent img_size" src="img/The-Difference-Between-Professional-Liability-and-Management-Liability-Insurance-e1528919801936.jpg" width="225" height="150" alt="Example image">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                        <div class="uk-panel">
+                            <img class="uk-align-left uk-margin-remove-adjacent img_size1" src="img/b095bd9033383ee7fc63c331fe85f9a4_gpo.png" width="275" height="250" alt="Example image">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+
+
+                    <h2 id="otz" class="uk-margin-bottom"><span uk-icon="comment"></span> Наши отзывы</h2>
+                    <hr class="uk-margin-medium-bottom">
+
+                    <!------------------------------------------------------------------------- 
+                        НАЧАЛО: Набор полей ввода для ДОБАВЛЕНИЯ КОММЕНТАРИЯ
+                    -------------------------------------------------------------------------->
+                    <input id="commentName" type="text" class="uk-input uk-margin-bottom" placeholder="Введите Ваше имя">
+                    <textarea id="commaentText" class="uk-textarea uk-margin-bottom" placeholder="Введите текст комментария"></textarea>
+                    <button class="uk-button uk-button-default uk-margin-medium-bottom"><span uk-icon="commenting"></span> Отправить комментарий</button>
+                    <!------------------------------------------------------------------------- 
+                        КОНЕЦ: Набор полей ввода для ДОБАВЛЕНИЯ КОММЕНТАРИЯ
+                    -------------------------------------------------------------------------->
+
+
+                    <!------------------------------------------------------------------------- 
+                        НАЧАЛО: Блок, содержащий все комментарии
+                    -------------------------------------------------------------------------->
+                    <div id="commentsContainer">
+
+                        <article class="uk-comment">
+                            <header class="uk-comment-header uk-flex uk-flex-middle">
+                                <div class="uk-width-auto">
+                                    <img class="uk-comment-avatar" src="https://robohash.org/%D0%B8%D0%BC%D1%8F%D0%BF%D0%BE%D0%BB%D1%8C%D0%B7%D0%BE%D0%B2%D0%B0%D1%82%D0%B5%D0%BB%D1%8F" width="80" height="80">
+                                </div>
+                                <div class="uk-width-expand">
+                                    <h4 class="uk-comment-title uk-margin-remove">Author</h4>
+                                </div>
+                            </header>
+                            <div class="uk-comment-body">
+                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+                                    tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero
+                                    eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea
+                                    takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                            </div>
+                        </article>
+
+                    </div>
+                    <!------------------------------------------------------------------------- 
+                        КОНЕЦ: Блок, содержащий все комментарии
+                    -------------------------------------------------------------------------->
+
+                    <!-- Заголовок + горизонтальная линия -->
+                    <h2 id="invent" class="uk-margin-bottom"><span uk-icon="album"></span> Каталог товаров</h2>
+                    <hr class="uk-margin-medium-bottom">
+
+                    <!-- НАЧАЛО: Вложенный грид - сетка карточек товаров -->
+                    <div id="productsContainer" uk-grid="masonry: true" class="uk-child-width-1-3">
+
+                    </div>
+                    <!-- КОНЕЦ: Вложенный грид - сетка карточек товаров -->
+
+
+
+
+
+
+                </main>
+            </div>
+            <!-- КОНЕЦ: Колонка содержимого (товары + комментарии) -->
+
+
+
+
+            <!------------------------------------------------------------------------------------- 
+                НАЧАЛО: БОКОВАЯ КОЛОНКА (Оставить заявку на обратный звонок)
+            -------------------------------------------------------------------------------------->
+            <!--
+            <div id="callbackForm" class="uk-width-1-4">
+                <h4>Перезвоните мне</h4>
+                <input id="orderName" type="text" class="uk-input uk-margin-bottom" placeholder="Ваше имя">
+                <input id="orderField" type="text" class="uk-input uk-margin-bottom" placeholder="Ваш телефон">
+                <button id="sendOrderBtn" class="uk-button uk-button-default uk-width-1-1"><span uk-icon="mail"></span>
+                    Отправить
+                    заявку</button>
+            </div>
+-->
+            
+
+            <!--            <a href="#offcanvas-usage" uk-toggle>Open</a>-->
+
+            <div id="offcanvas-usage" uk-offcanvas>
+                <div class="uk-offcanvas-bar">
+
+                    <button class="uk-offcanvas-close" type="button" uk-close></button>
+                    <h4>Отправьте заявку и мы обязательно вам перезвоним!</h4>
+                    <input id="orderName" type="text" class="uk-input uk-margin-bottom" placeholder="Ваше имя">
+                    <input id="orderField" type="text" class="uk-input uk-margin-bottom" placeholder="Ваш телефон">
+                    <button id="sendOrderBtn" class="uk-button uk-button-default uk-width-1-1"><span uk-icon="mail"></span>
+                        Отправить
+                        заявку</button>
+
+                </div>
+            </div>
+            
+            <!------------------------------------------------------------------------------------- 
+                КОНЕЦ: БОКОВАЯ КОЛОНКА (Оставить заявку на обратный звонок)
+            -------------------------------------------------------------------------------------->
+
+
+
+
+        </div>
+        <!-- КОНЕЦ: Внешний грид (разделяет на 2 колонки: контент и реклама) -->
+    </div>
+    <!-- КОНЕЦ: Тело страницы -->
+    <button class="uk-button uk-button-danger fix_but uk-icon-link" uk-icon="receiver" type="button" uk-toggle="target: #offcanvas-usage"></button>
+
+
+
+    <!-- Подключение скриптов для UIKit -->
     <script src="uikit/uikit.min.js"></script>
-    <script src="uikit/uikit-icons.js"></script>
+    <script src="uikit/uikit-icons.min.js"></script>
+
+    <!-- Подключаем HANDLEBARS -->
+    <script src="scripts/handlebars-v4.1.2.js"></script>
+
+
+    <!-- Наш скрипт -->
+    <script>
+        'use strict';
+
+
+
+        // ----------------------------------------------------------------------------------------
+        // --- ЗАДАНИЕ 1. -------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------
+
+        // создаем объект запроса для получения списка товаров
+        let xhrLoadProd = new XMLHttpRequest();
+        // настраиваем на отправку методом GET на url, возвращающий json-массив товаров
+        xhrLoadProd.open('GET', 'http://api.oneteacher.space/jsonstorage/16e8c90a7ed83dc69ef3e165b45316ee', true);
+        xhrLoadProd.send();
+
+        xhrLoadProd.addEventListener('readystatechange', function() {
+            if (xhrLoadProd.readyState == 4 && xhrLoadProd.status == 200) {
+                // преобразуем JSON-ответ в массив
+                let productsArr = JSON.parse(xhrLoadProd.responseText);
+
+                // задаем шаблон для habdlebars.js
+                // let templateCode = шаблон; (раскомментировать и дописать)
+                let templateCode = `
+                <div uk-scrollspy="cls:uk-animation-fade">
+                    <div class="uk-card uk-card-default uk-card-body">
+                    <h3 class="uk-card-title">
+                        {{title}}
+                    </h3>
+                    <img src="{{img}}">
+                    <p>
+                        {{description}}
+                    </p>
+                    <footer class="uk-flex uk-flex-between">
+                        <span class="uk-text-large uk-text-bold">
+                            {{price}} руб
+                        </span>
+                    <button class="uk-button uk-button-danger"><span uk-icon="cart"></span></button>
+                    </footer>
+                </div>
+                </div>
+                `;
+                // компилируем шаблон
+                let template = Handlebars.compile(templateCode); // (раскомментировать и дописать)
+
+                // получаем div, в который будем производить добавление товаров
+                let productsContainer = document.querySelector('#productsContainer');
+
+                // очищаем содержимое контейнера (чтобы удалить примеры товаров, уже заданные в HTML-коде)
+                productsContainer.innerHTML = '';
+
+                // обходим массив товаров, полученный с сервера
+                for (let product of productsArr) {
+                    // рендерим шаблон для текущегоо товара
+                    productsContainer.innerHTML += template(product);
+                }
+            }
+        });
+
+        // ----------------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------
+
+        document.querySelector('#sendOrderBtn2').addEventListener('click', function() {
+            if (newLogin.value == "") alert('Введите Login'); 
+                else
+                    if (newEmail.value == "") alert('Введите Email');
+                        else 
+                            if (newPassword.value == "") alert('Придумайте пароль');
+                                else 
+                                    if (newPassword2.value == "") alert('Подтвердите пароль'); 
+                                        else
+                                            if (newPassword.value != newPassword2.value) alert('Пароли не совпадают');
+                                                else {
+                                                    let xhr = new XMLHttpRequest();
+                                                    xhr.open('GET', 'http://api.oneteacher.space/jsonstorage/856c789b267947129d232d1a0c14a1f6', true);
+                                                    xhr.send();
+                                                    xhr.addEventListener('readystatechange', function() {
+                                                       if (xhr.readyState == 4 && xhr.status == 200) {
+                                                           let usersArr = JSON.parse(xhr.responseText);
+                                                           
+                                                       } 
+                                                    });
+                                                        
+                                                    
+                                                    
+                                                }
+        });
+        
+
+        // ----------------------------------------------------------------------------------------
+        // --- ЗАДАНИЕ 3.2. -----------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------
+
+        // Привяжем функцию отправки заявки на обратный звонок к соответствующей кнопке на странице
+        document.querySelector('#sendOrderBtn').addEventListener('click', function() {
+            if (orderName.value != "" && orderField.value != "") {
+                // получаем текущий список заявок
+                let xhr = new XMLHttpRequest();
+                xhr.open('GET', 'http://api.oneteacher.space/jsonstorage/dd9a90064123121244698c3b88b19c82', true);
+                xhr.send();
+
+                xhr.addEventListener('readystatechange', function() {
+                    // если запрос завершен и завершен без ошибок, то...
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        // преобразуем JSON-ответ в массив
+                        let ordersArr = JSON.parse(xhr.responseText);
+
+                        // сформируем объект новой заявки
+                        let newOrder = {
+                            // значения получаем из соответствующих полей ввода
+                            name: orderName.value,
+                            phone: orderField.value
+                        }
+                        // добавляем полученный объект заявки в массив заявок, полученный с сервера
+                        ordersArr.push(newOrder);
+
+                        // формируем новый запрос. Здесь мы будем обновлять содержимое JSON на сервере
+                        let xhrSender = new XMLHttpRequest();
+                        // для обновления требуется метод PUT
+                        xhrSender.open('PUT', 'http://api.oneteacher.space/jsonstorage/dd9a90064123121244698c3b88b19c82', true);
+
+                        // добавляем заголовок к запросу. Данный заголовок обязателен для отправки JSON PUT-запросом
+                        xhrSender.setRequestHeader('Content-type', 'JSON');
+
+                        // отправляем запрос с обновленным массивом заявок на сервер, чтобы он его сохранил
+                        xhrSender.send(JSON.stringify(ordersArr));
+
+                        // ответ можно не проверять, но при успешном завершении запроса выведем сообщение пользователю
+                        xhrSender.addEventListener('readystatechange', function() {
+                            // если запрос завершен ... 
+                            if (xhrSender.readyState == 4) {
+                                // и завершен без ошибок
+                                if (xhrSender.status == 200) {
+                                    // выведем сообщение о том, что заявка принята
+                                    alert('Ваша заявка принята. Оператор скоро свяжется с Вами!');
+                                } else {
+                                    //а если запрос завершился с ошибкой, выведем сообщение об ошибке
+                                    alert('Ошибка отправки. Попробуйте еще раз.');
+                                }
+                            }
+                        })
+                    }
+
+                });
+            }
+        });
+
+        // ----------------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------
+    </script>
 </body>
+
 </html>

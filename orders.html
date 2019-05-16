@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- Подключаем UIKit по ссылке с api.oneteacher.space -->
+    <link rel="stylesheet" href="uikit/uikit.min.css">
+</head>
+
+<body>
+    <!-- НАЧАЛО: Шапка сайта -->
+   <div class="uk-navbar-container">
+        <div class="uk-container uk-container-large">
+            <nav class="uk-navbar">
+
+                <!-- Логотип (название) -->
+                <div class="uk-navbar-left">
+                    <div class="uk-navbar-item uk-logo uk-text-bold uk-text-danger">
+                        КупиХотьЧто-то!
+                    </div>
+                </div>
+
+                <!-- Корзина -->
+                <div class="uk-navbar-right">
+                    <a href="index.html" class="uk-button uk-button-text uk-margin-right"> Главная</a>
+                </div>
+                <div class="uk-navbar-right">
+                    <nav class="uk-navbar-container" uk-navbar>
+                        <div class="uk-navbar-left">
+                            <ul class="uk-navbar-nav">
+                                <li>
+                                    <a href="#"><button class="uk-button uk-button-danger" type="button">Меню пользователя</button></a>
+                                    <div class="uk-navbar-dropdown">
+                                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                                         <li>
+                                                <h3> <span uk-icon="icon: user"></span><span class="uk-margin-left">Admin</span></h3>
+                                            </li>
+                                            <li class="uk-active uk-button uk-button-text"><a href="orders.html"> <span uk-icon="icon:  receiver"></span><span class="uk-margin-left">Управление звонками</span></a></li>
+                                            <li class="uk-active uk-button uk-button-text"><a href=""> <span uk-icon="icon:  mail"></span><span class="uk-margin-left">Управление заказами</span></a></li>
+                                            <li class="uk-active uk-button uk-button-text"><a href="addproduct.html"> <span uk-icon="icon: plus"></span><span class="uk-margin-left">Добавить товар</span></a></li>
+                                            <li class="uk-active uk-button uk-button-text"><a href="addproduct.html"> <span uk-icon="icon: plus"></span><span class="uk-margin-left">Пользователи</span></a></li>
+                                            <li class="uk-nav-divider"></li>
+                                            <li class="uk-active uk-button uk-button-text"><a href="#"> <span uk-icon="icon:  sign-out"></span><span class="uk-margin-left">Выход</span></a>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- КОНЕЦ: Шапка сайта -->
+
+    <!-- НАЧАЛО: Тело страницы -->
+    <div class="uk-container uk-container-large">
+        <table class="uk-table uk-table-divider uk-table-hover">
+            <tr>
+                <td>Имя</td>
+                <td>Телефон</td>
+            </tr>
+            <tbody id="orderLines">
+                <tr>
+                    <td>Имя</td>
+                    <td>Телефон</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- КОНЕЦ: Тело страницы -->
+
+
+
+
+    <!-- Подключение скриптов для UIKit -->
+    <script src="uikit/uikit.min.js"></script>
+    <script src="uikit/uikit-icons.min.js"></script>
+
+    <!-- Подключаем HANDLEBARS -->
+    <script src="scripts/handlebars-v4.1.2.js"></script>
+
+
+    <!-- Наш скрипт -->
+    <script>
+        'use strict';
+
+        let xhr = new XMLHttpRequest();
+        xhr.open('GET', 'http://api.oneteacher.space/jsonstorage/dd9a90064123121244698c3b88b19c82', true);
+        xhr.send();
+
+        xhr.addEventListener('readystatechange', function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                // преобразуем JSON - ответ
+                // ?????????
+                let orderArr = JSON.parse(xhr.responseText);
+                // задаем шаблон habdlebars.js
+                let tab = `<tr>
+   <td>{{name}}</td>
+   <td>{{phone}}</td>
+</tr>`;
+                
+                // компилируем шаблон
+                // ?????????
+                let shab = Handlebars.compile(tab);
+                // получаем контейнер, в который будем производить добавление
+                let ordersContainer = document.querySelector('#orderLines');
+
+                // очищаем содержимое контейнера (чтобы удалить примеры товаров, заданные в HTML)
+                ordersContainer.innerHTML = '';
+
+                // обходим массив товаров
+                for(let order of orderArr){
+                    // рендерим шаблон
+                    ordersContainer.innerHTML += shab(order);
+                }
+
+
+            }
+        });
+    </script>
+</body>
+
+</html>

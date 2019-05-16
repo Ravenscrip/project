@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <!-- Подключаем UIKit по ссылке с api.oneteacher.space -->
+    <link rel="stylesheet" href="uikit/uikit.min.css">
+</head>
+
+<body>
+    <!-- НАЧАЛО: Шапка сайта -->
+    <div class="uk-navbar-container">
+        <div class="uk-container uk-container-large">
+            <nav class="uk-navbar">
+
+                <!-- Логотип (название) -->
+                <div class="uk-navbar-left">
+                    <div class="uk-navbar-item uk-logo uk-text-bold uk-text-danger">
+                        КупиХотьЧто-то!
+                    </div>
+                </div>
+
+                <!-- Корзина -->
+                <div class="uk-navbar-right">
+                    <a href="index.html" class="uk-button uk-button-text uk-margin-right"> Главная</a>
+                </div>
+                <div class="uk-navbar-right">
+                    <nav class="uk-navbar-container" uk-navbar>
+                        <div class="uk-navbar-left">
+                            <ul class="uk-navbar-nav">
+                                <li>
+                                    <a href="#"><button class="uk-button uk-button-danger" type="button">Меню пользователя</button></a>
+                                    <div class="uk-navbar-dropdown">
+                                        <ul class="uk-nav uk-navbar-dropdown-nav kl">
+                                         <li>
+                                                <h3> <span uk-icon="icon: user"></span><span class="uk-margin-left">Admin</span></h3>
+                                            </li>
+                                            <li class="uk-active uk-button uk-button-text"><a href="orders.html"> <span uk-icon="icon:  receiver"></span><span class="uk-margin-left">Управление звонками</span></a></li>
+                                            <li class="uk-active uk-button uk-button-text"><a href=""> <span uk-icon="icon:  mail"></span><span class="uk-margin-left">Управление заказами</span></a></li>
+                                            <li class="uk-active uk-button uk-button-text"><a href="addproduct.html"> <span uk-icon="icon: plus"></span><span class="uk-margin-left">Добавить товар</span></a></li>
+                                            <li class="uk-active uk-button uk-button-text"><a href="addproduct.html"> <span uk-icon="icon: cog"></span><span class="uk-margin-left">Пользователи</span></a></li>
+                                            <li class="uk-nav-divider"></li>
+                                            <li class="uk-active uk-button uk-button-text"><a href="#"> <span uk-icon="icon:  sign-out"></span><span class="uk-margin-left">Выход</span></a>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <!-- КОНЕЦ: Шапка сайта -->
+
+
+
+    <div class="uk-container uk-container-small uk-flex uk-flex-center uk-flex-middle"
+        uk-height-viewport="offset-top: true">
+        <div class="uk-card uk-card-default uk-card-body uk-width-1-1">
+            <h1 class="uk-card-title">Добавить товар</h1>
+            <p>
+                Введите данные о товаре и нажмите кнопку "Добавить"
+            </p>
+
+            <input id="productTitle" type="text" class="uk-input uk-margin-bottom"
+                placeholder="Введите название товара">
+            <input id="productImg" type="text" class="uk-input uk-margin-bottom"
+                placeholder="Введите ссылку на изображение">
+            <textarea id="productDescription" class="uk-textarea uk-margin-bottom"
+                placeholder="Введите описание"></textarea>
+            <input id="productPrice" type="number" class="uk-input uk-margin-bottom" placeholder="Введите цену товара">
+
+            <button id="addProductBtn" class="uk-button uk-button-primary">Добавить</button>
+        </div>
+    </div>
+
+
+
+
+    <!-- Подключение скриптов для UIKit -->
+    <script src="uikit/uikit.min.js"></script>
+    <script src="uikit/uikit-icons.min.js"></script>
+
+    <!-- Подключаем HANDLEBARS -->
+    <script src="scripts/handlebars-v4.1.2.js"></script>
+
+
+    <script>
+        'use strict';
+
+
+        // ----------------------------------------------------------------------------------------
+        // --- ЗАДАНИЕ 3 --------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------
+
+        // При нажатии на кнопку "Добавить" мы будем делать следующее...
+        document.querySelector('#addProductBtn').addEventListener('click', function () {
+            // создаем объект запроса для получения текущего списка товаров
+            let xhrLoadProd = new XMLHttpRequest();
+            // настраиваем на отправку методом GET на url, возвращающий json-массив товаров
+            xhrLoadProd.open('GET', 'http://api.oneteacher.space/jsonstorage/dd28a8b029084ca1a7c5fd5475a40d75',
+                true);
+            xhrLoadProd.send();
+
+            xhrLoadProd.addEventListener('readystatechange', function () {
+                // преобразуем JSON - ответ
+                let productsArr = JSON.parse(xhr.responseText);
+
+                //  Создать новый объект по тому же формату, в котором у нас хранятся товары и заполнить его свойства 
+                let newProduct = {
+                    title: productTitle.value,
+                    img: productImg,
+                    description: productDescription /* value поля для ввода описания */,
+                    price: productPrice /* value поля для ввода цены */
+                };
+
+                // добавляем созданный объект в массив товаров
+                productsArr.push(newProduct);
+
+                // формируем новый запрос. Здесь мы будем обновлять содержимое JSON на сервере
+                let xhrSender = new XMLHttpRequest();
+                // для обновления требуется метод PUT
+                xhrSender.open('PUT', 'http://api.oneteacher.space/jsonstorage/dd9a90064123121244698c3b88b19c82', true);
+
+                // добавляем заголовок к запросу. Данный заголовок обязателен для отправки JSON PUT-запросом
+                xhrSender.setRequestHeader('Content-type', 'JSON');
+
+                // отправляем запрос с обновленным массивом товаров на сервер, чтобы он его сохранил
+                xhrSender.send( JSON.stringify(productsArr)); // не забудь про JSON.stringify()
+
+                // ответ можно не проверять, но при успешном завершении запроса выведем сообщение пользователю
+                xhrSender.addEventListener('readystatechange', function () {
+                    // если запрос завершен ... 
+                    if (xhrSender.readyState == 4) {
+                        // и завершен без ошибок
+                        if (xhrSender.status == 200) {
+                            // выведем сообщение о том, что заявка принята
+                            alert('Товар успешно добавлен!');
+                        } else {
+                            //а если запрос завершился с ошибкой, выведем сообщение об ошибке
+                            alert('Ошибка отправки. Попробуйте еще раз.');
+                        }
+                    }
+                })
+            });
+        });
+    </script>
+</body>
+
+</html>
